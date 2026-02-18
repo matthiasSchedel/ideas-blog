@@ -1,0 +1,42 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+interface PostModule {
+  frontmatter: {
+    title: string;
+    description?: string;
+    date?: string;
+  };
+  url?: string;
+}
+
+const posts = Object.values(import.meta.glob('./*.md', { eager: true })) as PostModule[];
+const sortedPosts = posts.sort((a, b) => {
+  const aTime = a.frontmatter.date ? new Date(a.frontmatter.date).getTime() : 0;
+  const bTime = b.frontmatter.date ? new Date(b.frontmatter.date).getTime() : 0;
+  return bTime - aTime;
+});
+---
+
+<BaseLayout title="Posts — Matthias Schedel" description="All blog posts by Matthias Schedel">
+  <h1>posts</h1>
+  <p class="muted">Short notes, ideas, and updates.</p>
+
+  <h2 class="section-heading">All Posts</h2>
+  <section class="list" aria-label="Posts list">
+    {
+      sortedPosts.map((post) => (
+        <article class="row">
+          <h3 class="row-title">
+            <a href={post.url}>{post.frontmatter.title}</a>
+          </h3>
+          <p class="row-meta">
+            {post.frontmatter.date ?? 'No date'}{post.frontmatter.description
+              ? ` - ${post.frontmatter.description}`
+              : ''}
+          </p>
+        </article>
+      ))
+    }
+  </section>
+</BaseLayout>

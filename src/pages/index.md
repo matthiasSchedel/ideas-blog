@@ -21,5 +21,6 @@ This is the home post where I publish ideas, updates, and links to what I am wor
 - [GitHub](https://github.com/matthiasschedel)
 - [LinkedIn](https://www.linkedin.com/in/matthias-schedel-593735a4)
 - [X](https://x.com/MatthiasSc21555)
+- [Posts](/posts)
 - [Projects](/projects)
 - [Contact](/contact)
